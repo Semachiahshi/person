@@ -15,6 +15,9 @@
         <input type="password" id="password" placeholder="Password" class="border p-2 rounded">
         <button class="bg-blue-500 text-white py-2 rounded">Register</button>
       </form>
+      <div id="notification" class="hidden p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
+        Verification email sent.
+      </div>
     </div>
     <div id="chat-section" class="hidden">
       <h2 class="text-xl font-bold mb-4">Chat Room</h2>
@@ -27,5 +30,27 @@
   </div>
   <script src="/socket.io/socket.io.js"></script>
   <script src="app.js"></script>
+  <script>
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const response = await fetch('/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        document.getElementById('notification').classList.remove('hidden');
+      } else {
+        alert(result.message);
+      }
+    });
+  </script>
 </body>
 </html>
