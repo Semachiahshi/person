@@ -22,6 +22,23 @@ mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Database connected'))
   .catch(err => console.error('Database connection error:', err));
 
+// Define User model
+const userSchema = new mongoose.Schema({
+  email: String,
+  password: String,
+  verified: { type: Boolean, default: false }
+});
+const User = mongoose.model('User', userSchema);
+
+// Configure nodemailer transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
 // Statické soubory
 app.use(express.static(path.join(__dirname, 'public')));
 
