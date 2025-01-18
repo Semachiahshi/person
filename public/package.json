@@ -11,7 +11,7 @@
     "dotenv": "^16.0.3"
   },
   "engines": {
-    "node": "16.x" // Ujistěte se, že Node.js verze odpovídá vercelu
+    "node": "16.x" 
   },
   "license": "ISC"
 }
