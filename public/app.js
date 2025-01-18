@@ -79,6 +79,11 @@ app.get('/verify/:id', async (req, res) => {
   }
 });
 
+// Guest login route
+app.post('/guest-login', (req, res) => {
+  res.sendStatus(200);
+});
+
 // Socket.IO for Real-Time Chat
 const users = {};
 
